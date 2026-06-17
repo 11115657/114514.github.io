@@ -1,46 +1,148 @@
-# Fluid Glass Resume System
+# Resume OS Final
 
-这是一个可直接部署到 GitHub Pages 的现代化个人简历交互系统。
+一个完整可直接落地的个人简历展示站：高级视觉、性能优先、SEO/PWA、项目筛选、命令面板、技能可视化、打印优化和 GitHub Actions Node 24 质量检查。
 
-## 特点
+## 直接部署
 
-- 纯静态：无 npm、无构建依赖、无后端
-- 可配置：只改 `profile.config.js` 就能更新个人信息
-- 高级 UI：流体 Canvas 背景、毛玻璃卡片、动态光晕、主题切换
-- 高交互：Ctrl/⌘ + K 命令面板、项目筛选、项目搜索、FAQ 面板、技能雷达、卡片拖拽、沉浸模式
-- 稳定性：兼容 GitHub Pages，包含 `.nojekyll`
-- 性能策略：RAF 动画、IntersectionObserver、passive listener、prefers-reduced-motion 降级
-
-## 文件说明
+将本目录所有文件放到 GitHub Pages 发布分支的根目录，然后在 GitHub：
 
 ```txt
-/root 或 仓库根目录
-├─ index.html          页面结构
-├─ styles.css          UI、动画、响应式、打印样式
-├─ app.js              交互逻辑
-├─ profile.config.js   你的简历数据，只改这里
-├─ .nojekyll           防止 GitHub Pages Jekyll 处理静态文件
+Settings → Pages → Build and deployment
+Branch：你的发布分支
+Folder：/ root
+Save
+```
+
+无需 npm、无需构建、无需服务器。
+
+## 你主要修改哪里
+
+只需要修改：
+
+```txt
+profile.config.js
+```
+
+可修改内容：
+
+- 姓名、职位、地区、简介
+- 邮箱、电话、GitHub、LinkedIn、作品集链接
+- 项目、经历、技能、教育、FAQ
+- SEO 标题和描述
+- 默认主题
+- 头像路径
+
+头像示例：
+
+```js
+avatar: './assets/avatar.jpg'
+```
+
+然后把 `avatar.jpg` 放进 `assets/`。
+
+## 文件结构
+
+```txt
+.
+├─ index.html
+├─ styles.css
+├─ app.js
+├─ profile.config.js
+├─ sw.js
+├─ offline.html
+├─ site.webmanifest
+├─ robots.txt
+├─ sitemap.xml
+├─ .nojekyll
+├─ assets/
+│  ├─ favicon.svg
+│  └─ social-preview.svg
+├─ tools/
+│  └─ validate.mjs
+├─ .github/workflows/
+│  └─ quality.yml
+├─ package.json
+├─ CHANGELOG.md
 └─ README.md
 ```
 
-## 使用方式
+## 已完成的最终优化
 
-1. 把这些文件放到 GitHub Pages 指定发布目录。
-2. 如果 Pages 设置为：Branch = 主要角色，Folder = /root，则把文件放进该分支的仓库根目录。
-3. 修改 `profile.config.js` 中的 name、role、projects、skills、experience 等数据。
-4. 提交并推送。
-5. 打开 GitHub Pages 链接查看效果。
+### A. 性能极致优化
 
-## 自定义建议
+- 无框架、无运行时依赖、无构建步骤。
+- Canvas 背景按需运行，页面隐藏时自动暂停。
+- 小屏自动降低粒子密度和 devicePixelRatio。
+- 支持 `prefers-reduced-motion` 和静读模式。
+- 使用 IntersectionObserver 触发滚动动画和计数动画。
+- 长页面 section 使用 `content-visibility` 降低渲染成本。
+- 打印模式单独优化，隐藏背景和导航。
+- Service Worker 缓存核心资源，支持离线回退页。
 
-- 头像：把图片放到 `assets/avatar.jpg`，然后在 `profile.config.js` 里设置 `avatar: './assets/avatar.jpg'`
-- 主题：`themeDefault` 可选 `aurora`、`ocean`、`ember`
-- 项目：增加 `projects` 数组即可自动出现在搜索、筛选、命令面板中
-- 技能：修改 `skills` 数组即可自动更新技能条和雷达图
+### B. 顶级视觉展示
 
-## 后续可升级方向
+- 流体背景、玻璃拟态、主题系统、高级渐变文字。
+- 角色标题流动渐变，姓名逐字展开。
+- 卡片内部鼠标高光跟随，不遮挡正文。
+- 桌面端有顶部导航和右侧章节 rail。
+- 移动端有底部 Dock，适合单手快速跳转。
+- 项目详情弹窗、项目指标、技能雷达图、技能条动画。
 
-- 接入 CMS：用 JSON 文件或 Notion API 管理内容
-- 接入真实 AI：让 FAQ 变成联网或本地知识库问答
-- 接入统计：用 Plausible / Umami 观察访问行为
-- 组件化：迁移到 Vite + React / Vue
+### D. 可直接落地交付
+
+- 包含 GitHub Pages 所需 `.nojekyll`。
+- 包含 PWA manifest 和 Service Worker。
+- 包含 SEO meta、Open Graph、Twitter Card、JSON-LD。
+- 包含 GitHub Actions 质量检查。
+- 包含无依赖 Node 24 校验脚本。
+
+## 本地检查
+
+需要 Node.js 24：
+
+```bash
+npm run check
+```
+
+只做配置和文件检查：
+
+```bash
+npm run validate
+```
+
+## 快捷键
+
+```txt
+Ctrl / ⌘ + K  打开命令面板
+Esc           关闭弹窗或命令面板
+Enter         打开聚焦项目卡片详情
+```
+
+## GitHub Actions Node 20 警告修复
+
+本项目 workflow 已使用：
+
+```yaml
+uses: actions/checkout@v6
+uses: actions/setup-node@v6
+uses: actions/upload-artifact@v7
+node-version: 24
+```
+
+并设置：
+
+```yaml
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+```
+
+这用于规避 Node.js 20 弃用警告，并让质量检查面向 Node.js 24。
+
+## 上线前建议
+
+1. 修改 `profile.config.js`。
+2. 修改 `sitemap.xml` 里的域名。
+3. 修改 `meta.baseUrl`。
+4. 替换 `assets/social-preview.svg` 或保留默认预览图。
+5. 上传到 GitHub Pages 根目录。
+6. 打开页面测试桌面端、移动端、打印和命令面板。

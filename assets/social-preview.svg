@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070916"/>
+      <stop offset=".55" stop-color="#020617"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="a" cx="24%" cy="22%" r="70%"><stop offset="0" stop-color="#8b5cf6" stop-opacity=".58"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b" cx="78%" cy="30%" r="62%"><stop offset="0" stop-color="#22d3ee" stop-opacity=".44"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+    <radialGradient id="c" cx="72%" cy="86%" r="60%"><stop offset="0" stop-color="#f472b6" stop-opacity=".30"/><stop offset="1" stop-color="#f472b6" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#a)"/>
+  <rect width="1200" height="630" fill="url(#b)"/>
+  <rect width="1200" height="630" fill="url(#c)"/>
+  <rect x="84" y="78" width="1032" height="474" rx="46" fill="#fff" opacity=".09" stroke="#fff" stroke-opacity=".20"/>
+  <text x="130" y="198" fill="#a7b0c5" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="6">RESUME OS FINAL</text>
+  <text x="130" y="322" fill="#fff" font-family="Arial, sans-serif" font-size="82" font-weight="900">Personal Brand System</text>
+  <text x="130" y="400" fill="#dbeafe" font-family="Arial, sans-serif" font-size="38" font-weight="600">Performance · Premium Visual · SEO · PWA</text>
+  <circle cx="1000" cy="188" r="58" fill="#22d3ee" opacity=".38"/>
+  <circle cx="924" cy="456" r="88" fill="#f472b6" opacity=".28"/>
+</svg>

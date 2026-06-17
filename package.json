@@ -1,0 +1,22 @@
+{
+  "name": "resume-os-final",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Performance-first personal resume and portfolio website for GitHub Pages.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "check:js": "node --check app.js && node --check profile.config.js && node --check sw.js",
+    "check": "npm run check:js && npm run validate"
+  },
+  "keywords": [
+    "resume",
+    "portfolio",
+    "github-pages",
+    "pwa",
+    "glassmorphism"
+  ]
+}

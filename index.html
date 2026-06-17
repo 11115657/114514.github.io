@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="aurora">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#080a18" />
+  <meta name="description" content="A performance-first, glassmorphism personal resume and portfolio website." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Resume OS · Personal Portfolio" />
+  <meta property="og:description" content="A performance-first personal resume and portfolio website." />
+  <meta property="og:image" content="./assets/social-preview.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Resume OS · Personal Portfolio" />
+  <meta name="twitter:description" content="A performance-first personal resume and portfolio website." />
+  <meta name="twitter:image" content="./assets/social-preview.svg" />
+
+  <title>Resume OS · Personal Portfolio</title>
+
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <link rel="preload" href="./styles.css" as="style" />
+  <link rel="preload" href="./profile.config.js" as="script" />
+  <link rel="preload" href="./app.js" as="script" />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <script type="application/ld+json" id="schemaPerson">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "你的名字",
+    "jobTitle": "高性能前端 / AI 产品 / 全栈工程师",
+    "url": "https://your-domain.example",
+    "email": "your.email@example.com"
+  }
+  </script>
+</head>
+<body class="is-loading" id="top">
+  <a class="skip-link" href="#about">跳到正文</a>
+  <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="spotlight" aria-hidden="true"></div>
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header glass-shell" role="banner">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark" id="brandMark">OS</span>
+      <span>
+        <strong id="brandName">Resume OS</strong>
+        <small id="brandSubtitle">Interactive Career Profile</small>
+      </span>
+    </a>
+
+    <nav class="top-nav" id="topNav" aria-label="主导航"></nav>
+
+    <div class="header-actions" aria-label="页面工具">
+      <button type="button" id="openCommand" class="icon-button" aria-label="打开命令面板">⌘K</button>
+      <button type="button" id="themeBtn" class="icon-button" aria-label="切换主题">◐</button>
+      <button type="button" id="readModeBtn" class="icon-button" aria-pressed="false" aria-label="切换静读模式">静</button>
+    </div>
+  </header>
+
+  <aside class="section-rail glass-shell" id="sectionRail" aria-label="章节快速导航"></aside>
+
+  <main>
+    <section class="hero section" id="about" aria-labelledby="heroName">
+      <div class="hero-copy" data-depth="0.45">
+        <p class="eyebrow" id="availabilityDot">Open to opportunities</p>
+        <h1 id="heroName">你的名字</h1>
+        <p class="hero-role" id="heroRole">高性能前端 / AI 产品 / 全栈工程师</p>
+        <p class="hero-summary" id="heroSummary">把复杂系统做成高级、可信、可交互的产品体验。</p>
+        <div class="hero-actions">
+          <a class="primary-action magnetic" id="emailCta" href="mailto:your.email@example.com">联系我</a>
+          <button class="secondary-action magnetic" type="button" id="spotlightBtn">查看亮点</button>
+          <button class="secondary-action magnetic" type="button" id="printBtn">保存 PDF</button>
+        </div>
+      </div>
+
+      <div class="hero-panel glass-card" data-depth="0.8" aria-label="个人概要卡片">
+        <div class="avatar" id="avatar" aria-hidden="true">OS</div>
+        <div>
+          <p class="eyebrow">Executive Summary</p>
+          <h2 id="consoleName">你的名字</h2>
+          <p id="consoleHeadline">把复杂系统做成高级、可信、可交互的产品体验。</p>
+        </div>
+        <div id="summaryGrid" class="summary-grid"></div>
+        <div id="consoleMeta" class="meta-list"></div>
+        <div id="consoleLinks" class="link-row"></div>
+      </div>
+    </section>
+
+    <section class="section compact" aria-labelledby="statusTitle">
+      <h2 id="statusTitle" class="sr-only">快速指标</h2>
+      <div class="metric-grid" id="metricGrid"></div>
+    </section>
+
+    <section class="section" id="highlights" aria-labelledby="highlightsTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Final Optimization</p>
+        <h2 id="highlightsTitle">最终深度优化形态</h2>
+        <p>性能、视觉、可读性、SEO、PWA 与部署质量同时收敛，而不是单纯堆动画。</p>
+      </div>
+      <div class="highlight-grid" id="highlightGrid"></div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projectsTitle">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Selected Work</p>
+          <h2 id="projectsTitle">项目展示</h2>
+          <p>支持分类筛选、关键词搜索和项目详情弹窗。</p>
+        </div>
+        <label class="search-box" for="projectSearch">
+          <span>搜索</span>
+          <input id="projectSearch" type="search" placeholder="项目 / 技术 / 影响" autocomplete="off" />
+        </label>
+      </div>
+      <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="项目分类"></div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+    <section class="section" id="experience" aria-labelledby="experienceTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Career Timeline</p>
+        <h2 id="experienceTitle">经历时间线</h2>
+        <p>用可扫描的信息结构展示角色、场景、成果和证据链。</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skillsTitle">
+      <div class="section-heading split">
+        <div>
+          <p class="eyebrow">Capability Map</p>
+          <h2 id="skillsTitle">能力图谱</h2>
+          <p>雷达图负责概览，技能条负责细节，保证视觉表达和可读性平衡。</p>
+        </div>
+      </div>
+      <div class="skills-layout">
+        <div class="radar-card glass-card">
+          <canvas id="radarCanvas" width="520" height="520" aria-label="技能雷达图"></canvas>
+        </div>
+        <div class="skill-bars" id="skillBars"></div>
+      </div>
+    </section>
+
+    <section class="section" id="education" aria-labelledby="educationTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Learning</p>
+        <h2 id="educationTitle">教育与持续学习</h2>
+      </div>
+      <div class="education-grid" id="educationGrid"></div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faqTitle">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faqTitle">常见问题</h2>
+      </div>
+      <div class="faq-layout glass-card">
+        <div class="question-list" id="questionList"></div>
+        <div class="answer-box" id="answerBox" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contactTitle">
+      <div class="contact-card glass-card">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contactTitle">让我们开始一次高质量沟通</h2>
+        <p id="contactSummary">欢迎联系我。</p>
+        <div class="contact-actions" id="contactActions"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="mobile-dock glass-shell" id="mobileDock" aria-label="移动端快捷导航"></nav>
+
+  <button type="button" class="to-top" id="toTop" aria-label="返回顶部">↑</button>
+
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="modal-backdrop" id="projectBackdrop"></div>
+    <div class="modal-panel glass-card" id="projectDetail" tabindex="-1"></div>
+  </div>
+
+  <div class="modal command-modal" id="commandModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+    <div class="modal-backdrop" id="commandBackdrop"></div>
+    <div class="command-panel glass-card">
+      <h2 id="commandTitle">Command Palette</h2>
+      <input id="commandInput" type="search" placeholder="搜索项目、技能、经历，或输入 print / theme / contact" autocomplete="off" />
+      <div class="command-results" id="commandResults" role="listbox"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <section class="noscript glass-card">
+      <h1>Resume OS</h1>
+      <p>此页面需要 JavaScript 来渲染完整交互内容。你仍然可以在 profile.config.js 中查看全部简历数据。</p>
+    </section>
+  </noscript>
+
+  <script src="./profile.config.js"></script>
+  <script src="./app.js" defer></script>
+</body>
+</html>
